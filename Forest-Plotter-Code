@@ -1,0 +1,274 @@
+# --- One-piece forest plot + table (bold header, thin underline, roomy rows) ---
+
+import pandas as pd
+import matplotlib.pyplot as plt
+from matplotlib.gridspec import GridSpec
+from matplotlib.ticker import FixedLocator, FuncFormatter, NullFormatter
+from matplotlib.font_manager import FontProperties, findfont
+import numpy as np
+
+# ========= USER-EDITABLE SECTION =========
+# 1) Choose the effect measure you are plotting on the x-axis.
+#    Valid examples: "HR", "RR", "OR"
+EFFECT_MEASURE = "HR"  # <-- change to "RR" or "OR" etc as needed
+
+# 2) Enter your data.
+#    Each row is: ("Outcome label", midpoint, lower_CI, upper_CI)
+#    Replace these example rows with your own outcomes and effect estimates.
+EVENT_STATS = [
+    ("Chronic Bronchitis",                1.31, 1.18, 1.45),
+    ("COPD Exacerbation",                 1.48, 1.33, 1.64),
+    ("Lung Cancer",                       2.96, 2.60, 3.33),
+    ("Ischemic Stroke",                   1.27, 1.14, 1.40),
+    ("Myocardial Infarction",             1.34, 1.21, 1.48),
+    ("Peripheral Artery Disease",         1.52, 1.36, 1.69),
+    ("Pneumonia",                         1.22, 1.10, 1.35),
+    ("Hospitalization",                   1.41, 1.27, 1.56),
+    ("ICU Admission",                     1.18, 1.06, 1.31),
+    ("All Cause Mortality",               1.67, 1.50, 1.86),
+]
+# =========================================
+
+# ========= TUNABLES (visual style) =========
+ROW_PITCH_PT     = 16.0
+UNDERLINE_GAP_PT = 1.8
+UNDERLINE_LW     = 1.2
+DPI_EXPORT       = 600
+TABLE_FONT_SZ    = 12
+SEP_RULE_W       = 0.8
+SEP_ALPHA        = 0.25
+TABLE_WIDTH_FRAC = 0.60
+# ==========================================
+
+# Build axis label from effect measure
+X_AXIS_LABEL = f"{EFFECT_MEASURE} (95% CI)"
+
+# ---- Times New Roman fallback ----
+CANDS = ["Times New Roman","Times","Liberation Serif","Nimbus Roman","DejaVu Serif"]
+def choose_times():
+    for fam in CANDS:
+        try:
+            findfont(FontProperties(family=fam), fallback_to_default=False)
+            return fam
+        except Exception:
+            pass
+    return "DejaVu Serif"
+
+FONT_FAMILY = choose_times()
+FP = FontProperties(family=FONT_FAMILY, size=TABLE_FONT_SZ)
+
+# ---- Prep data frame ----
+df = pd.DataFrame(EVENT_STATS, columns=["Outcome","Mid","Lo","Hi"])
+df[X_AXIS_LABEL] = df.apply(
+    lambda r: f"{r['Mid']:.2f} ({r['Lo']:.2f}-{r['Hi']:.2f})",
+    axis=1
+)
+
+# ========= INTERACTIVE X-AXIS SETUP =========
+def ask_float(prompt, default):
+    txt = input(f"{prompt} [{default}]: ").strip()
+    return float(txt) if txt else default
+
+def ask_int(prompt, default):
+    txt = input(f"{prompt} [{default}]: ").strip()
+    return int(txt) if txt else default
+
+print("\n=== X-axis customization ===")
+left_xlim  = ask_float("Left-most x-axis value (recommended 0.5)", 0.5)
+right_xlim = ask_float("Right-most x-axis value (recommended 4 or 5)", 4.0)
+
+if left_xlim >= 1.0 or right_xlim <= 1.0:
+    raise ValueError("Left-most must be < 1 and right-most must be > 1 for this layout.")
+
+# Determine recommended UNLABELED ticks between 1 and right-most
+if abs(right_xlim - 4.0) < 1e-8:
+    rec_unlabeled_msg = "2 (for right-most = 4)"
+    default_right_unlabeled = 2
+elif abs(right_xlim - 5.0) < 1e-8:
+    rec_unlabeled_msg = "3 (for right-most = 5)"
+    default_right_unlabeled = 3
+else:
+    rec_unlabeled_msg = "3 or 4 (adjust as needed)"
+    default_right_unlabeled = 3
+
+n_left_unlabeled = ask_int(
+    "Number of UNLABELED ticks between left-most and 1 (recommended 4)",
+    4
+)
+
+n_right_unlabeled = ask_int(
+    f"Number of UNLABELED ticks between 1 and right-most (recommended {rec_unlabeled_msg})",
+    default_right_unlabeled
+)
+
+n_right_labeled_interior = ask_int(
+    "Number of LABELED ticks between 1 and right-most (excluding 1 and right-most; recommended 0)",
+    0
+)
+
+# Build tick positions (equidistant within each side)
+left_segment  = np.linspace(left_xlim, 1.0, n_left_unlabeled + 2)   # includes left and 1
+right_segment = np.linspace(1.0, right_xlim, n_right_unlabeled + 2) # includes 1 and right
+
+# All ticks (avoid duplicating 1.0)
+all_ticks = np.concatenate((left_segment, right_segment[1:]))
+all_ticks = np.unique(np.round(all_ticks, 10))
+
+# Decide which right-side interior ticks will be labeled
+right_interior = [t for t in all_ticks if (t > 1.0) and (t < right_xlim)]
+n_right_labeled_interior = max(0, min(n_right_labeled_interior, len(right_interior)))
+label_positions = [left_xlim, 1.0, right_xlim]
+
+if n_right_labeled_interior > 0 and len(right_interior) > 0:
+    # Pick interior right ticks to label, roughly evenly spaced
+    idxs = np.linspace(
+        0,
+        len(right_interior) - 1,
+        n_right_labeled_interior,
+        dtype=int
+    )
+    for idx in np.unique(idxs):
+        label_positions.append(right_interior[idx])
+
+label_positions = np.unique(np.round(label_positions, 10))
+
+# Split into major (labeled) and minor (unlabeled) ticks
+def split_major_minor(all_vals, labeled_vals, tol=1e-8):
+    majors, minors = [], []
+    for v in all_vals:
+        if np.any(np.isclose(v, labeled_vals, rtol=0, atol=tol)):
+            majors.append(v)
+        else:
+            minors.append(v)
+    return np.array(sorted(majors)), np.array(sorted(minors))
+
+major_ticks, minor_ticks = split_major_minor(all_ticks, label_positions)
+
+label_positions_arr = np.array(label_positions)
+
+def format_tick_value(x):
+    # integer if very close to integer, else up to 3 significant figures
+    if abs(x - round(x)) < 1e-8:
+        return str(int(round(x)))
+    else:
+        return f"{x:.3g}"
+
+def major_tick_formatter(x, pos):
+    if np.any(np.isclose(x, label_positions_arr, rtol=0, atol=1e-8)):
+        return format_tick_value(x)
+    return ""
+
+# ========= FIGURE GEOMETRY =========
+n = len(df)
+n_rows_total   = n + 1  # header + data
+row_pitch_in   = ROW_PITCH_PT / 72.0
+uline_gap_in   = UNDERLINE_GAP_PT / 72.0
+text_height_in = TABLE_FONT_SZ / 72.0
+
+fig_h_in = n_rows_total * row_pitch_in + 0.10
+fig_w_in = 6.6
+
+fig = plt.figure(figsize=(fig_w_in, fig_h_in), dpi=DPI_EXPORT)
+gs = GridSpec(
+    1, 2,
+    width_ratios=[TABLE_WIDTH_FRAC, 1 - TABLE_WIDTH_FRAC],
+    wspace=0.06, left=0.06, right=0.98, top=0.98, bottom=0.12
+)
+ax_tab = fig.add_subplot(gs[0,0])
+ax_fp  = fig.add_subplot(gs[0,1])
+
+# Shared y geometry
+ax_tab.set_ylim(0, n_rows_total)
+ax_fp.set_ylim(0, n_rows_total)
+
+def row_center(i):
+    # i is 0-based row index in df
+    return n_rows_total - (i + 1) - 0.5
+
+# ===== TABLE =====
+ax_tab.axis("off")
+
+y_header_center = n_rows_total - 0.5
+ax_tab.text(
+    0.02, y_header_center, "Outcome",
+    fontproperties=FP, weight="bold", va="center", ha="left"
+)
+ax_tab.text(
+    0.55, y_header_center, X_AXIS_LABEL,
+    fontproperties=FP, weight="bold", va="center", ha="left"
+)
+
+pad_rows = (text_height_in/2 + uline_gap_in) / row_pitch_in
+y_underline = y_header_center - pad_rows
+ax_tab.plot(
+    [0.02, 0.98], [y_underline, y_underline],
+    color="black", linewidth=UNDERLINE_LW,
+    solid_capstyle="butt", clip_on=False
+)
+
+for i, r in df.reset_index().iterrows():
+    yc = row_center(i)
+    ax_tab.text(
+        0.02, yc, str(r["Outcome"]),
+        fontproperties=FP, va="center", ha="left"
+    )
+    ax_tab.text(
+        0.55, yc, str(r[X_AXIS_LABEL]),
+        fontproperties=FP, va="center", ha="left"
+    )
+
+light = (0, 0, 0, SEP_ALPHA)
+for k in range(2, n_rows_total):
+    y = n_rows_total - k
+    ax_tab.plot(
+        [0.02, 0.98], [y, y],
+        color=light, linewidth=SEP_RULE_W,
+        solid_capstyle="butt", clip_on=False
+    )
+
+# ===== FOREST PLOT =====
+ax_fp.set_xscale("linear")
+ax_fp.set_xlim(left_xlim, right_xlim)
+ax_fp.yaxis.set_visible(False)
+
+for s in ["top","left","right"]:
+    ax_fp.spines[s].set_visible(False)
+
+# Apply the user-driven ticks
+ax_fp.xaxis.set_major_locator(FixedLocator(major_ticks))
+ax_fp.xaxis.set_minor_locator(FixedLocator(minor_ticks))
+ax_fp.xaxis.set_major_formatter(FuncFormatter(major_tick_formatter))
+ax_fp.xaxis.set_minor_formatter(NullFormatter())
+
+ax_fp.grid(False)
+ax_fp.axvline(1.0, linestyle=":", color="black", linewidth=1)
+
+ax_fp.tick_params(axis="x", which="major", length=5)
+ax_fp.tick_params(axis="x", which="minor", length=3)
+ax_fp.set_xlabel(X_AXIS_LABEL, fontproperties=FP)
+
+# Style for CI and markers
+ci_color = (0.30, 0.30, 0.30)
+mark_fc  = (0.20, 0.36, 0.40)
+mark_ec  = (0.10, 0.18, 0.20)
+mark_sz  = 32
+ci_lw    = 1.6
+
+for i, r in df.reset_index().iterrows():
+    yc = row_center(i)
+    ax_fp.hlines(
+        y=yc, xmin=r["Lo"], xmax=r["Hi"],
+        color=ci_color, linewidth=ci_lw, zorder=1
+    )
+    ax_fp.scatter(
+        [r["Mid"]], [yc], s=mark_sz, marker="s",
+        facecolor=mark_fc, edgecolor=mark_ec,
+        linewidths=1.2, zorder=2
+    )
+
+# ===== SAVE OUTPUTS =====
+plt.savefig("forestpanel.pdf",  format="pdf",  bbox_inches="tight")
+plt.savefig("forestpanel.png",  format="png",  dpi=600, bbox_inches="tight")
+plt.savefig("forestpanel.tiff", format="tiff", dpi=600, bbox_inches="tight")
+
+print("Saved: forestpanel.pdf, forestpanel.png, forestpanel.tiff")
