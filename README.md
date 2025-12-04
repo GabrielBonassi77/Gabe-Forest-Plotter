@@ -11,7 +11,7 @@ Python notebook that builds a clean forest plot with a linked results table and 
 
 In your copy of the notebook:
 
-- Change the effect measure label (HR, RR, OR) by editing:
+  Change the effect measure label (HR, RR, OR) by editing:
   ```python
   EFFECT_MEASURE = "HR"  # or "RR", "OR"
   ```
