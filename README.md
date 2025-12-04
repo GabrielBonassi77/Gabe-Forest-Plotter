@@ -26,3 +26,16 @@ Then run all cells. The notebook will create:
 - forestpanel.pdf
 - forestpanel.png
 - forestpanel.tiff
+
+## Citations
+
+To obtain a list of all library versions, run the citation helper code block: 
+```
+import sys
+import pandas as pd
+import matplotlib
+
+print("Python:", sys.version)
+print("pandas:", pd.__version__)
+print("matplotlib:", matplotlib.__version__)
+```
