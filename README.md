@@ -19,7 +19,7 @@ In your copy of the notebook:
   Edit the EVENT_STATS list with your own outcomes and 95% CIs:
   ```EVENT_STATS = [
     ("Outcome label", midpoint, lower_CI, upper_CI),
-    # add more rows here]
+    # add more rows here
   ```
 
 Then run all cells. The notebook will create:
