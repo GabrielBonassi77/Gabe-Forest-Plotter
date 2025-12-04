@@ -4,8 +4,7 @@ Python notebook that builds a clean forest plot with a linked results table and 
 
 ## Use in Colab
 
-1. Open in Colab:  
-   [Open in Colab](https://colab.research.google.com/drive/1bLZIyY-uqO1ydYCxyEiA2jDn9-ofaf4x?usp=sharing)
+1. Open Code in Colab: Link (https://colab.research.google.com/drive/1bLZIyY-uqO1ydYCxyEiA2jDn9-ofaf4x?usp=sharing)
 2. In Colab, go to **File → Save a copy in Drive** so you can edit.
 
 ## How to customize
