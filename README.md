@@ -7,8 +7,9 @@ Python script that builds a clean forest plot with an aligned results table. Exp
 
 ## How to Use:
 
-1. Open script in Google Colab (make sure you're signed into Google): Link (https://colab.research.google.com/drive/1bLZIyY-uqO1ydYCxyEiA2jDn9-ofaf4x?usp=sharing)
-2. In Colab, go to **File → Save a copy in Drive** so you can edit.
+1. Open script in Google Colab (make sure you're signed into Google).
+Link: (https://colab.research.google.com/drive/1bLZIyY-uqO1ydYCxyEiA2jDn9-ofaf4x?usp=sharing)
+3. In Colab, go to **File → Save a copy in Drive** so you can edit.
 
 ## How to Customize:
 
