@@ -3,7 +3,7 @@
 Python script that builds a clean forest plot with an aligned results table. Exports high quality figures (PDF, PNG, TIFF).
 
 ## Example Output:
-
+![alt text](https://github.com/GabrielBonassi77/Gabe-Forest-Plotter/blob/main/FigureExample.png "Example Figure 1")
 
 ## How to Use:
 
