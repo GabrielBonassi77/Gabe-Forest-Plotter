@@ -2,16 +2,16 @@
 
 Python notebook that builds a clean forest plot with a linked results table and exports high resolution figures (PDF, PNG, TIFF).
 
-Example Figure: 
+## Example Output:
 ![alt text](https://github.com/GabrielBonassi77/Gabe-Forest-Plotter/blob/main/FigureExample.png "Example Figure 1")
 
 
-## Use in Colab
+## How to Use:
 
 1. Open Code in Colab: Link (https://colab.research.google.com/drive/1bLZIyY-uqO1ydYCxyEiA2jDn9-ofaf4x?usp=sharing)
 2. In Colab, go to **File → Save a copy in Drive** so you can edit.
 
-## How to customize
+## How to Customize:
 
 In your copy of the notebook:
 
@@ -31,7 +31,7 @@ Then run all cells. The notebook will create:
 - forestpanel.png
 - forestpanel.tiff
 
-## Citations
+## Citations:
 
 To obtain a list of all library versions, run the citation helper code block: 
 ```
