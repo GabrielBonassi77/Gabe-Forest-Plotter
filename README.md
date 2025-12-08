@@ -26,7 +26,7 @@ In your copy of the notebook:
     # add more rows here
   ```
 
-Then run the script. You will be prompted some questions about x-axis design (left-most value, right-most value, how many ticks, etc.; if you don't know what to choose, just go with the recommended values and hit enter for each prompt).
+Then run the script. You will be prompted to answer some questions about x-axis design (left-most value, right-most value, how many ticks, etc.; if you don't know what to choose, just go with the recommended values and hit enter for each prompt).
 Feel free to play around with it until you get your ideal figure. After all prompts are answered, the script will output the following:
 - forestpanel.pdf
 - forestpanel.png
