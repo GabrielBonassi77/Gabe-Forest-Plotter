@@ -1,4 +1,4 @@
-# Gabe-Forest-Plotter
+# Gabe's Forest Plotter
 
 Python script that builds a clean forest plot with an aligned results table. Exports high quality figures (PDF, PNG, TIFF).
 
