@@ -1,0 +1,20 @@
+{
+  "pet_id": "canopy",
+  "display_name": "Canopy",
+  "description": "A small woodland data-sprite that helps Gabriel turn forest data into clear plots.",
+  "frames": {
+    "idle": 6,
+    "running-right": 8,
+    "running-left": 8,
+    "waving": 4,
+    "jumping": 5,
+    "failed": 8,
+    "waiting": 6,
+    "running": 6,
+    "review": 6
+  },
+  "cell": {
+    "width": 192,
+    "height": 208
+  }
+}

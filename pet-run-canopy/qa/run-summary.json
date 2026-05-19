@@ -1,0 +1,9 @@
+﻿{
+    "review":  "C:\\Users\\gabri\\Documents\\Forest Plotter\\pet-run-canopy\\qa\\review.json",
+    "validation":  "C:\\Users\\gabri\\Documents\\Forest Plotter\\pet-run-canopy\\final\\validation.json",
+    "ok":  true,
+    "contact_sheet":  "C:\\Users\\gabri\\Documents\\Forest Plotter\\pet-run-canopy\\qa\\contact-sheet.png",
+    "run_dir":  "C:\\Users\\gabri\\Documents\\Forest Plotter\\pet-run-canopy",
+    "package":  "C:\\Users\\gabri\\.codex\\pets\\canopy",
+    "spritesheet":  "C:\\Users\\gabri\\Documents\\Forest Plotter\\pet-run-canopy\\final\\spritesheet.webp"
+}

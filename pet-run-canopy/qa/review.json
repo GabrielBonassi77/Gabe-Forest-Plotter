@@ -1,0 +1,350 @@
+{
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "note": "Hand-drawn fallback frames generated after built-in image generation was unavailable.",
+  "cells": [
+    {
+      "state": "idle",
+      "row": 0,
+      "column": 0,
+      "ok": true
+    },
+    {
+      "state": "idle",
+      "row": 0,
+      "column": 1,
+      "ok": true
+    },
+    {
+      "state": "idle",
+      "row": 0,
+      "column": 2,
+      "ok": true
+    },
+    {
+      "state": "idle",
+      "row": 0,
+      "column": 3,
+      "ok": true
+    },
+    {
+      "state": "idle",
+      "row": 0,
+      "column": 4,
+      "ok": true
+    },
+    {
+      "state": "idle",
+      "row": 0,
+      "column": 5,
+      "ok": true
+    },
+    {
+      "state": "running-right",
+      "row": 1,
+      "column": 0,
+      "ok": true
+    },
+    {
+      "state": "running-right",
+      "row": 1,
+      "column": 1,
+      "ok": true
+    },
+    {
+      "state": "running-right",
+      "row": 1,
+      "column": 2,
+      "ok": true
+    },
+    {
+      "state": "running-right",
+      "row": 1,
+      "column": 3,
+      "ok": true
+    },
+    {
+      "state": "running-right",
+      "row": 1,
+      "column": 4,
+      "ok": true
+    },
+    {
+      "state": "running-right",
+      "row": 1,
+      "column": 5,
+      "ok": true
+    },
+    {
+      "state": "running-right",
+      "row": 1,
+      "column": 6,
+      "ok": true
+    },
+    {
+      "state": "running-right",
+      "row": 1,
+      "column": 7,
+      "ok": true
+    },
+    {
+      "state": "running-left",
+      "row": 2,
+      "column": 0,
+      "ok": true
+    },
+    {
+      "state": "running-left",
+      "row": 2,
+      "column": 1,
+      "ok": true
+    },
+    {
+      "state": "running-left",
+      "row": 2,
+      "column": 2,
+      "ok": true
+    },
+    {
+      "state": "running-left",
+      "row": 2,
+      "column": 3,
+      "ok": true
+    },
+    {
+      "state": "running-left",
+      "row": 2,
+      "column": 4,
+      "ok": true
+    },
+    {
+      "state": "running-left",
+      "row": 2,
+      "column": 5,
+      "ok": true
+    },
+    {
+      "state": "running-left",
+      "row": 2,
+      "column": 6,
+      "ok": true
+    },
+    {
+      "state": "running-left",
+      "row": 2,
+      "column": 7,
+      "ok": true
+    },
+    {
+      "state": "waving",
+      "row": 3,
+      "column": 0,
+      "ok": true
+    },
+    {
+      "state": "waving",
+      "row": 3,
+      "column": 1,
+      "ok": true
+    },
+    {
+      "state": "waving",
+      "row": 3,
+      "column": 2,
+      "ok": true
+    },
+    {
+      "state": "waving",
+      "row": 3,
+      "column": 3,
+      "ok": true
+    },
+    {
+      "state": "jumping",
+      "row": 4,
+      "column": 0,
+      "ok": true
+    },
+    {
+      "state": "jumping",
+      "row": 4,
+      "column": 1,
+      "ok": true
+    },
+    {
+      "state": "jumping",
+      "row": 4,
+      "column": 2,
+      "ok": true
+    },
+    {
+      "state": "jumping",
+      "row": 4,
+      "column": 3,
+      "ok": true
+    },
+    {
+      "state": "jumping",
+      "row": 4,
+      "column": 4,
+      "ok": true
+    },
+    {
+      "state": "failed",
+      "row": 5,
+      "column": 0,
+      "ok": true
+    },
+    {
+      "state": "failed",
+      "row": 5,
+      "column": 1,
+      "ok": true
+    },
+    {
+      "state": "failed",
+      "row": 5,
+      "column": 2,
+      "ok": true
+    },
+    {
+      "state": "failed",
+      "row": 5,
+      "column": 3,
+      "ok": true
+    },
+    {
+      "state": "failed",
+      "row": 5,
+      "column": 4,
+      "ok": true
+    },
+    {
+      "state": "failed",
+      "row": 5,
+      "column": 5,
+      "ok": true
+    },
+    {
+      "state": "failed",
+      "row": 5,
+      "column": 6,
+      "ok": true
+    },
+    {
+      "state": "failed",
+      "row": 5,
+      "column": 7,
+      "ok": true
+    },
+    {
+      "state": "waiting",
+      "row": 6,
+      "column": 0,
+      "ok": true
+    },
+    {
+      "state": "waiting",
+      "row": 6,
+      "column": 1,
+      "ok": true
+    },
+    {
+      "state": "waiting",
+      "row": 6,
+      "column": 2,
+      "ok": true
+    },
+    {
+      "state": "waiting",
+      "row": 6,
+      "column": 3,
+      "ok": true
+    },
+    {
+      "state": "waiting",
+      "row": 6,
+      "column": 4,
+      "ok": true
+    },
+    {
+      "state": "waiting",
+      "row": 6,
+      "column": 5,
+      "ok": true
+    },
+    {
+      "state": "running",
+      "row": 7,
+      "column": 0,
+      "ok": true
+    },
+    {
+      "state": "running",
+      "row": 7,
+      "column": 1,
+      "ok": true
+    },
+    {
+      "state": "running",
+      "row": 7,
+      "column": 2,
+      "ok": true
+    },
+    {
+      "state": "running",
+      "row": 7,
+      "column": 3,
+      "ok": true
+    },
+    {
+      "state": "running",
+      "row": 7,
+      "column": 4,
+      "ok": true
+    },
+    {
+      "state": "running",
+      "row": 7,
+      "column": 5,
+      "ok": true
+    },
+    {
+      "state": "review",
+      "row": 8,
+      "column": 0,
+      "ok": true
+    },
+    {
+      "state": "review",
+      "row": 8,
+      "column": 1,
+      "ok": true
+    },
+    {
+      "state": "review",
+      "row": 8,
+      "column": 2,
+      "ok": true
+    },
+    {
+      "state": "review",
+      "row": 8,
+      "column": 3,
+      "ok": true
+    },
+    {
+      "state": "review",
+      "row": 8,
+      "column": 4,
+      "ok": true
+    },
+    {
+      "state": "review",
+      "row": 8,
+      "column": 5,
+      "ok": true
+    }
+  ]
+}
