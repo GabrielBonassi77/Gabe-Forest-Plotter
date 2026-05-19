@@ -25,7 +25,7 @@ def run_background(command: list[str], log_file: Path | None = None) -> subproce
 
 
 def wait_for_tunnel_url(timeout_seconds: int = 45) -> str:
-    pattern = re.compile(r"https://[a-zA-Z0-9.-]+\\.trycloudflare\\.com")
+    pattern = re.compile(r"https://[a-zA-Z0-9.-]+\.trycloudflare\.com")
     deadline = time.time() + timeout_seconds
 
     while time.time() < deadline:
