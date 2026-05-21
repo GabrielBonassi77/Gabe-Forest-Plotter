@@ -1,11 +1,26 @@
 # Gabe's Forest Plotter
 
-Python script that builds a clean forest plot with an aligned results table. Exports high quality figures (PDF, PNG, TIFF).
+Browser app and Python script for building clean forest plots with aligned results tables. Exports high quality figures for manuscripts and presentations.
+
+## Public Web App
+
+Use the no-install browser version here:
+
+https://gabrielbonassi77.github.io/Gabe-Forest-Plotter/
+
+The web app runs entirely in your browser. There is no Colab warning, no temporary tunnel link, and no shared server handling uploaded data.
 
 ## Example Output:
 ![alt text](https://github.com/GabrielBonassi77/Gabe-Forest-Plotter/blob/main/FigureExample.png "Example Figure 1")
 
 ## How to Use:
+
+### Browser App
+
+1. Open the public web app.
+2. Upload a CSV/Excel file or edit the example rows directly.
+3. Adjust the axis, tick marks, row spacing, table width, font size, and marker size.
+4. Download the result as PDF, PNG, TIFF, or SVG.
 
 ### Streamlit App
 
@@ -16,6 +31,8 @@ Python script that builds a clean forest plot with an aligned results table. Exp
 3. Open the temporary `trycloudflare.com` link printed by the final cell.
 
 Each user runs their own Colab session, so app traffic is distributed across users instead of hitting one shared server.
+
+The Colab option is kept as a fallback for people who specifically want to run the Python/Streamlit version. The public browser app is the recommended option for normal use.
 
 ### Original Script
 

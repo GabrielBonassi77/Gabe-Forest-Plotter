@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Create publication-ready forest plots directly in your browser.">
+  <title>Forest Plotter</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="hero">
+      <div>
+        <h1>Forest Plotter</h1>
+        <p>Publication-ready forest plots from CSV, Excel, or directly edited rows. Runs completely in your browser.</p>
+      </div>
+      <div class="hero-actions">
+        <button class="ghost-button" id="loadExampleBtn" type="button">Load example</button>
+        <button class="primary-button" id="downloadPngTopBtn" type="button">Download PNG</button>
+      </div>
+    </header>
+
+    <section class="workbench" aria-label="Forest plot workbench">
+      <aside class="panel controls-panel">
+        <div class="panel-title">
+          <h2>Plot Controls</h2>
+          <button class="icon-button" id="resetAxisBtn" type="button" title="Reset axis">
+            <span aria-hidden="true">↺</span>
+            <span class="sr-only">Reset axis</span>
+          </button>
+        </div>
+
+        <div class="control-grid">
+          <label class="field">
+            <span>Effect measure</span>
+            <input id="effectMeasure" type="text" value="HR" maxlength="12">
+          </label>
+          <label class="field">
+            <span>Raster export DPI</span>
+            <select id="exportDpi">
+              <option value="300">300</option>
+              <option value="450">450</option>
+              <option value="600" selected>600</option>
+              <option value="900">900</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>X-axis minimum</span>
+            <input id="axisMin" type="number" step="0.1" min="0.01" value="0.5">
+          </label>
+          <label class="field">
+            <span>X-axis maximum</span>
+            <input id="axisMax" type="number" step="0.1" min="1.01" value="4">
+          </label>
+          <label class="field">
+            <span>Left minor ticks</span>
+            <input id="leftTicks" type="number" step="1" min="0" max="20" value="4">
+          </label>
+          <label class="field">
+            <span>Right minor ticks</span>
+            <input id="rightTicks" type="number" step="1" min="0" max="20" value="2">
+          </label>
+        </div>
+
+        <div class="slider-stack">
+          <label class="slider-row">
+            <span>Table width</span>
+            <strong id="tableWidthValue">0.60</strong>
+            <input id="tableWidth" type="range" min="0.40" max="0.75" step="0.01" value="0.60">
+          </label>
+          <label class="slider-row">
+            <span>Font size</span>
+            <strong id="fontSizeValue">12</strong>
+            <input id="fontSize" type="range" min="8" max="18" step="1" value="12">
+          </label>
+          <label class="slider-row">
+            <span>Marker</span>
+            <strong id="markerSizeValue">32</strong>
+            <input id="markerSize" type="range" min="12" max="90" step="2" value="32">
+          </label>
+          <label class="slider-row">
+            <span>Figure width</span>
+            <strong id="figureWidthValue">6.8</strong>
+            <input id="figureWidth" type="range" min="5.5" max="13" step="0.1" value="6.8">
+          </label>
+          <label class="slider-row">
+            <span>Row spacing</span>
+            <strong id="rowSpacingValue">16</strong>
+            <input id="rowSpacing" type="range" min="11" max="26" step="0.5" value="16">
+          </label>
+        </div>
+      </aside>
+
+      <section class="panel preview-panel">
+        <div class="panel-title">
+          <h2>Preview</h2>
+          <p id="statusText" role="status">Ready</p>
+        </div>
+        <div class="plot-frame" id="plotFrame">
+          <svg id="forestPlot" role="img" aria-label="Forest plot preview"></svg>
+        </div>
+        <div class="download-grid">
+          <button id="downloadPdfBtn" type="button">PDF</button>
+          <button id="downloadPngBtn" type="button">PNG</button>
+          <button id="downloadTiffBtn" type="button">TIFF</button>
+          <button id="downloadSvgBtn" type="button">SVG</button>
+        </div>
+      </section>
+    </section>
+
+    <section class="data-section panel">
+      <div class="data-toolbar">
+        <div>
+          <h2>Data</h2>
+          <p>Use columns named Outcome, Mid point, Low CI, and High CI.</p>
+        </div>
+        <div class="data-actions">
+          <label class="file-button">
+            <input id="fileInput" type="file" accept=".csv,.xlsx,.xls">
+            <span>Upload CSV or Excel</span>
+          </label>
+          <button id="templateBtn" type="button">CSV template</button>
+          <button id="addRowBtn" type="button">Add row</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Outcome</th>
+              <th>Mid point</th>
+              <th>Low CI</th>
+              <th>High CI</th>
+              <th aria-label="Row actions"></th>
+            </tr>
+          </thead>
+          <tbody id="dataBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/utif@3.1.0/UTIF.min.js" defer></script>
+  <script src="app.js" defer></script>
+</body>
+</html>
