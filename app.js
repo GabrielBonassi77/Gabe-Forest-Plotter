@@ -229,7 +229,7 @@ function renderPlot() {
   const nRowsTotal = rows.length + 1;
   const width = Math.round(config.figureWidth * 96);
   const baseHeight = Math.round((nRowsTotal * config.rowSpacing) / 72 * 96 + 28);
-  const bottomWhitespace = 56;
+  const bottomWhitespace = 38;
   const height = baseHeight + bottomWhitespace;
   const tableWidth = width * config.tableWidth;
   const plotWidth = width - tableWidth - 32;
