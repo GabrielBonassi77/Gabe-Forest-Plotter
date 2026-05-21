@@ -222,6 +222,8 @@ def automatic_right_minor_ticks(right_xlim: float) -> int:
 def reset_axis() -> None:
     st.session_state.left_axis_text = "0.5"
     st.session_state.right_axis_text = "4"
+    st.session_state.left_minor_ticks = 4
+    st.session_state.right_minor_ticks = automatic_right_minor_ticks(4)
     st.session_state.last_valid_tick_config = TickConfig()
 
 
@@ -230,6 +232,14 @@ if "plot_data" not in st.session_state:
 
 if "last_valid_tick_config" not in st.session_state:
     st.session_state.last_valid_tick_config = TickConfig()
+
+if "left_minor_ticks" not in st.session_state:
+    st.session_state.left_minor_ticks = 4
+
+if "right_minor_ticks" not in st.session_state:
+    st.session_state.right_minor_ticks = automatic_right_minor_ticks(
+        st.session_state.last_valid_tick_config.right_xlim
+    )
 
 if "last_uploaded_signature" not in st.session_state:
     st.session_state.last_uploaded_signature = None
@@ -276,19 +286,19 @@ with top_left:
         with tick_inputs[0]:
             n_left_unlabeled = st.number_input(
                 "Left minor ticks",
-                value=4,
                 min_value=0,
                 max_value=20,
                 step=1,
+                key="left_minor_ticks",
                 help="Adds unlabeled tick marks between the x-axis minimum and 1.",
             )
         with tick_inputs[1]:
             n_right_unlabeled = st.number_input(
                 "Right minor ticks",
-                value=automatic_right_minor_ticks(st.session_state.last_valid_tick_config.right_xlim),
                 min_value=0,
                 max_value=20,
                 step=1,
+                key="right_minor_ticks",
                 help="Adds unlabeled tick marks between 1 and the x-axis maximum. This changes tick density, not the data values.",
             )
 
