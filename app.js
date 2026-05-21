@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "tableWidth", "fontSize", "markerSize", "figureWidth", "rowSpacing",
     "forestPlot", "dataBody", "plotFrame", "statusText", "fileInput",
     "tableWidthValue", "fontSizeValue", "markerSizeValue", "figureWidthValue", "rowSpacingValue",
-    "loadExampleBtn", "downloadPngTopBtn", "resetAxisBtn", "downloadPdfBtn",
+    "loadExampleBtn", "downloadPdfTopBtn", "resetAxisBtn",
     "downloadPngBtn", "downloadTiffBtn", "downloadSvgBtn", "templateBtn", "addRowBtn",
   ].forEach((id) => {
     els[id] = document.getElementById(id);
@@ -84,8 +84,7 @@ function bindEvents() {
   els.fileInput.addEventListener("change", handleFile);
   els.downloadSvgBtn.addEventListener("click", downloadSvg);
   els.downloadPngBtn.addEventListener("click", () => downloadPng());
-  els.downloadPngTopBtn.addEventListener("click", () => downloadPng());
-  els.downloadPdfBtn.addEventListener("click", downloadPdf);
+  els.downloadPdfTopBtn.addEventListener("click", downloadPdf);
   els.downloadTiffBtn.addEventListener("click", downloadTiff);
 }
 
