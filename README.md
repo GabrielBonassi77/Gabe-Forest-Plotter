@@ -4,7 +4,7 @@ A simple tool for making clean forest plots for manuscripts, posters, and presen
 
 ## Use the App
 
-[Click here to use the web app](https://gabrielbonassi77.github.io/Gabe-Forest-Plotter/)
+<a href="https://gabrielbonassi77.github.io/Gabe-Forest-Plotter/" target="_blank" rel="noopener noreferrer">https://gabrielbonassi77.github.io/Gabe-Forest-Plotter/</a>
 
 ## Example
 
