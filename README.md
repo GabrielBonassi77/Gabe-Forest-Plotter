@@ -9,7 +9,7 @@ Python script that builds a clean forest plot with an aligned results table. Exp
 
 ### Streamlit App
 
-[![Open Streamlit app in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/GabrielBonassi77/Gabe-Forest-Plotter/blob/main/Forest_Plotter_Colab.ipynb)
+[![Open Streamlit app in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/GabrielBonassi77/Gabe-Forest-Plotter/blob/main/Forest_Plotter_App_Colab.ipynb)
 
 1. Open the Streamlit app notebook in Google Colab.
 2. Run all cells.
