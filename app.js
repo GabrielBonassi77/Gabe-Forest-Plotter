@@ -228,12 +228,14 @@ function renderPlot() {
   const axisLabel = `${config.effect} (95% CI)`;
   const nRowsTotal = rows.length + 1;
   const width = Math.round(config.figureWidth * 96);
-  const height = Math.round((nRowsTotal * config.rowSpacing) / 72 * 96 + 28);
+  const baseHeight = Math.round((nRowsTotal * config.rowSpacing) / 72 * 96 + 28);
+  const bottomWhitespace = 56;
+  const height = baseHeight + bottomWhitespace;
   const tableWidth = width * config.tableWidth;
   const plotWidth = width - tableWidth - 32;
   const leftPad = 18;
   const topPad = 14;
-  const bottomPad = 30;
+  const bottomPad = 30 + bottomWhitespace;
   const rowPitch = (height - topPad - bottomPad) / nRowsTotal;
   const plotX = tableWidth + 22;
   const plotYTop = topPad;
@@ -259,7 +261,7 @@ function renderPlot() {
     addLine(svg, x(tick), axisY, x(tick), axisY + 6, "#222", 1);
     addText(svg, x(tick), axisY + 18, fmtTick(tick), fontSize, "normal", "middle");
   });
-  addText(svg, plotX + plotWidth / 2, height - 4, axisLabel, fontSize, "normal", "middle");
+  addText(svg, plotX + plotWidth / 2, axisY + fontSize * 3, axisLabel, fontSize, "normal", "middle");
 
   rows.forEach((row, i) => {
     const y = topPad + rowPitch * (i + 1.55);
