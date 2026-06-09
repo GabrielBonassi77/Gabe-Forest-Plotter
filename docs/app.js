@@ -19,7 +19,7 @@ const state = {
 
 document.addEventListener("DOMContentLoaded", () => {
   [
-    "effectMeasure", "exportDpi", "axisMin", "axisMax", "leftTicks", "rightTicks",
+    "effectMeasure", "outcomeLabel", "exportDpi", "axisMin", "axisMax", "leftTicks", "rightTicks",
     "tableWidth", "fontSize", "markerSize", "figureWidth", "rowSpacing",
     "forestPlot", "dataBody", "plotFrame", "statusText", "fileInput",
     "tableWidthValue", "fontSizeValue", "markerSizeValue", "figureWidthValue", "rowSpacingValue",
@@ -168,6 +168,7 @@ function getConfig() {
 
   return {
     effect: (els.effectMeasure.value.trim() || "HR").slice(0, 12),
+    outcomeLabel: els.outcomeLabel.value.trim() || "Outcome",
     dpi: Number(els.exportDpi.value),
     min,
     max,
@@ -247,7 +248,7 @@ function renderPlot() {
   svg.setAttribute("height", height);
   svg.innerHTML = `<rect width="${width}" height="${height}" fill="#fff"></rect>`;
 
-  addText(svg, leftPad, topPad + rowPitch * 0.56, "Outcome", fontSize, "bold");
+  addText(svg, leftPad, topPad + rowPitch * 0.56, config.outcomeLabel, fontSize, "bold");
   addText(svg, tableWidth * 0.55, topPad + rowPitch * 0.56, axisLabel, fontSize, "bold");
   addLine(svg, leftPad, topPad + rowPitch * 0.82, tableWidth - 8, topPad + rowPitch * 0.82, "#000", 1.2);
 

@@ -157,6 +157,7 @@ def format_tick_value(x: float) -> str:
 def make_forest_plot(
     data: pd.DataFrame | Iterable[Sequence[object]],
     effect_measure: str = "HR",
+    outcome_label: str = "Outcome",
     tick_config: TickConfig | None = None,
     style: PlotStyle | None = None,
 ) -> plt.Figure:
@@ -165,6 +166,7 @@ def make_forest_plot(
     style = style or PlotStyle()
 
     x_axis_label = f"{effect_measure.strip() or 'Effect'} (95% CI)"
+    outcome_header = outcome_label.strip() or "Outcome"
     df[x_axis_label] = df.apply(
         lambda r: f"{r['Mid']:.2f} ({r['Lo']:.2f}-{r['Hi']:.2f})",
         axis=1,
@@ -204,7 +206,7 @@ def make_forest_plot(
 
     ax_tab.axis("off")
     y_header_center = n_rows_total - 0.5
-    ax_tab.text(0.02, y_header_center, "Outcome", fontproperties=fp, weight="bold", va="center", ha="left")
+    ax_tab.text(0.02, y_header_center, outcome_header, fontproperties=fp, weight="bold", va="center", ha="left")
     ax_tab.text(
         style.table_text_column_x,
         y_header_center,

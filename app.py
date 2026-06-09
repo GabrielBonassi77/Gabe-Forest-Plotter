@@ -266,6 +266,11 @@ with top_left:
             effect_measure = st.text_input("Effect measure", value="HR", help="Examples: HR, RR, OR")
         with dpi_col:
             export_dpi = st.selectbox("Raster export DPI", [300, 450, 600, 900], index=2)
+        outcome_label = st.text_input(
+            "Outcome label",
+            value="Outcome",
+            help="Shown as the left table header in the exported chart.",
+        )
 
         axis_inputs = st.columns(2)
         with axis_inputs[0]:
@@ -431,6 +436,7 @@ with preview_slot:
         fig = make_forest_plot(
             clean_data,
             effect_measure=effect_measure,
+            outcome_label=outcome_label,
             tick_config=tick_config,
             style=style,
         )
